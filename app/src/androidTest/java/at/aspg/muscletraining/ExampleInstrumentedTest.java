@@ -1,4 +1,4 @@
-package aspg.at.muscletraining;
+package at.aspg.muscletraining;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

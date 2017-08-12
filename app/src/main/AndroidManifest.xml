@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="aspg.at.muscletraining">
+    package="at.aspg.muscletraining">
 
     <application
         android:allowBackup="true"

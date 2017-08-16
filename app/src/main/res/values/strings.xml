@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MuscleTraining</string>
+    <string name="plan_item_break">Break</string>
 </resources>

@@ -1,28 +1,26 @@
 package at.aspg.muscletraining.data;
 
-import at.aspg.muscletraining.R;
-import at.aspg.muscletraining.Util;
-
-public class Break implements DisplayableItem {
+public class DurationExercise extends SetsExercise implements Duration {
 	
 	private int duration;
 	
+	public DurationExercise() {
+		duration = 0;
+	}
+	
+	@Override
 	public int getDuration() {
 		return duration;
 	}
 	
+	@Override
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 	
 	@Override
-	public String getName() {
-		return Util.getString(R.string._break);
-	}
-	
-	@Override
 	public String getDetails() {
-		return "";
+		return null;
 	}
 	
 }

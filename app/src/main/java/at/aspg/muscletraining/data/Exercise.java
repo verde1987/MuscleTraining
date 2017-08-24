@@ -2,15 +2,22 @@ package at.aspg.muscletraining.data;
 
 import java.util.EnumSet;
 
-public abstract class Exercise implements PlanItem {
+import at.aspg.muscletraining.R;
+import at.aspg.muscletraining.Util;
+
+public abstract class Exercise implements DisplayableItem {
 	
 	private String name;
 	private String description;
-	private int sets;
-	private int reps;
-	private int breakTime;
 	private EnumSet<MuscleRegion> primaryMuscleRegions;
 	private EnumSet<MuscleRegion> secondaryMuscleRegions;
+	
+	public Exercise() {
+		name = Util.getString(R.string.default_exercise);
+		description = "";
+		primaryMuscleRegions = EnumSet.noneOf(MuscleRegion.class);
+		secondaryMuscleRegions = EnumSet.noneOf(MuscleRegion.class);
+	}
 	
 	@Override
 	public String getName() {
@@ -29,30 +36,6 @@ public abstract class Exercise implements PlanItem {
 		this.description = description;
 	}
 	
-	public int getSets() {
-		return sets;
-	}
-	
-	public void setSets(int sets) {
-		this.sets = sets;
-	}
-	
-	public int getReps() {
-		return reps;
-	}
-	
-	public void setReps(int reps) {
-		this.reps = reps;
-	}
-	
-	public int getBreakTime() {
-		return breakTime;
-	}
-	
-	public void setBreakTime(int breakTime) {
-		this.breakTime = breakTime;
-	}
-	
 	public EnumSet<MuscleRegion> getPrimaryMuscleRegions() {
 		return primaryMuscleRegions;
 	}
@@ -67,11 +50,6 @@ public abstract class Exercise implements PlanItem {
 	
 	public void setSecondaryMuscleRegions(EnumSet<MuscleRegion> secondaryMuscleRegions) {
 		this.secondaryMuscleRegions = secondaryMuscleRegions;
-	}
-	
-	@Override
-	public String getDetails() {
-		return sets + " x " + reps;
 	}
 	
 }

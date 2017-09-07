@@ -1,9 +1,11 @@
-package at.aspg.muscletraining.data;
+package at.aspg.muscletraining.data.exercises;
 
 import java.util.EnumSet;
 
 import at.aspg.muscletraining.R;
-import at.aspg.muscletraining.Util;
+import at.aspg.muscletraining.util.AndroidUtil;
+import at.aspg.muscletraining.data.DisplayableItem;
+import at.aspg.muscletraining.data.MuscleRegion;
 
 public abstract class Exercise implements DisplayableItem {
 	
@@ -13,7 +15,7 @@ public abstract class Exercise implements DisplayableItem {
 	private EnumSet<MuscleRegion> secondaryMuscleRegions;
 	
 	public Exercise() {
-		name = Util.getString(R.string.default_exercise);
+		name = AndroidUtil.getString(R.string.default_exercise);
 		description = "";
 		primaryMuscleRegions = EnumSet.noneOf(MuscleRegion.class);
 		secondaryMuscleRegions = EnumSet.noneOf(MuscleRegion.class);

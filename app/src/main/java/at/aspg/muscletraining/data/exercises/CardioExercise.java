@@ -1,4 +1,6 @@
-package at.aspg.muscletraining.data;
+package at.aspg.muscletraining.data.exercises;
+
+import java.io.OutputStream;
 
 public class CardioExercise extends Exercise implements Duration {
 	
@@ -21,6 +23,11 @@ public class CardioExercise extends Exercise implements Duration {
 	@Override
 	public String getDetails() {
 		return null;
+	}
+	
+	@Override
+	public void serialize(OutputStream out) {
+		
 	}
 	
 }

@@ -1,4 +1,4 @@
-package at.aspg.muscletraining.data;
+package at.aspg.muscletraining.data.exercises;
 
 public abstract class SetsExercise extends Exercise {
 	

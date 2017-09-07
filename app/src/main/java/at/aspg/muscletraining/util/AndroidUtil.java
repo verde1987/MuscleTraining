@@ -1,11 +1,11 @@
-package at.aspg.muscletraining;
+package at.aspg.muscletraining.util;
 
 import android.content.Context;
 
 /**
- * A class consisting of various static utility method.
+ * A class consisting of various static utility method regarding Android functionality.
  */
-public class Util {
+public class AndroidUtil {
 	
 	private static Context context;
 	
@@ -24,7 +24,7 @@ public class Util {
 	 * @param context the global context object of the main application.
 	 */
 	public static void setContext(Context context) {
-		Util.context = context;
+		AndroidUtil.context = context;
 	}
 	
 	/**

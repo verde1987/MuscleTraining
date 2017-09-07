@@ -1,4 +1,6 @@
-package at.aspg.muscletraining.data;
+package at.aspg.muscletraining.data.exercises;
+
+import java.io.OutputStream;
 
 public class WeightDurationExercise extends DurationExercise implements Weight {
 	
@@ -19,5 +21,10 @@ public class WeightDurationExercise extends DurationExercise implements Weight {
 	}
 	
 	// TODO: @Override String getDetails()
+	
+	@Override
+	public void serialize(OutputStream out) {
+		// TODO: maybe can reuse from super.serialize???
+	}
 	
 }

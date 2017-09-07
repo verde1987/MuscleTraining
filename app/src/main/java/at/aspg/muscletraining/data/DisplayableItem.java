@@ -3,7 +3,7 @@ package at.aspg.muscletraining.data;
 /**
  * This class represents an item which can be displayed in a list.
  */
-public interface DisplayableItem {
+public interface DisplayableItem extends Serializable {
 	
 	String getName();
 	

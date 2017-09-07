@@ -4,12 +4,14 @@ import java.util.EnumSet;
 
 public class Plan extends AbstractPlan {
 	
+	private EnumSet<Weekday> weekDays = EnumSet.noneOf(Weekday.class);
+	
 	public EnumSet<Weekday> getWeekdays() {
-		return null;
+		return weekDays;
 	}
 	
 	public void setWeekdays(EnumSet<Weekday> weekdays) {
-		// TODO
+		this.weekDays = weekdays;
 	}
 	
 	@Override

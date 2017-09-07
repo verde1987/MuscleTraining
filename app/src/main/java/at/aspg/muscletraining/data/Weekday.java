@@ -3,18 +3,19 @@ package at.aspg.muscletraining.data;
 
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 //TODO: instead of null ---> exception?!
-//TODO: add unitTest to ensure index matches DateFormatSymbols arrays
+//TODO: add locale for different languages
 public enum Weekday {
-	MONDAY(0),
-	TUESDAY(1),
-	WEDNESDAY(2),
-	THURSDAY(3),
-	FRIDAY(4),
-	SATURDAY(5),
-	SUNDAY(6);
+	MONDAY(Calendar.MONDAY),
+	TUESDAY(Calendar.TUESDAY),
+	WEDNESDAY(Calendar.WEDNESDAY),
+	THURSDAY(Calendar.THURSDAY),
+	FRIDAY(Calendar.FRIDAY),
+	SATURDAY(Calendar.SATURDAY),
+	SUNDAY(Calendar.SUNDAY);
 	
 	private static final DateFormatSymbols dateSymbols = new SimpleDateFormat().getDateFormatSymbols();
 	private final int index;

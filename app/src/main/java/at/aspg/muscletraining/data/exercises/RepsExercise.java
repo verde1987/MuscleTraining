@@ -1,5 +1,8 @@
 package at.aspg.muscletraining.data.exercises;
 
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
 import java.io.OutputStream;
 
 public class RepsExercise extends SetsExercise {
@@ -24,8 +27,7 @@ public class RepsExercise extends SetsExercise {
 	}
 	
 	@Override
-	public void serialize(OutputStream out) {
+	public void serialize(XmlSerializer serializer, OutputStream out) throws IOException {
 		
 	}
-	
 }

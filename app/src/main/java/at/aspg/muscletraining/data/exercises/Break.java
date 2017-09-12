@@ -1,5 +1,8 @@
 package at.aspg.muscletraining.data.exercises;
 
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -31,7 +34,17 @@ public class Break implements DisplayableItem {
 	}
 	
 	@Override
-	public void serialize(OutputStream out) {
+	public void serialize(XmlSerializer serializer, OutputStream out) throws IOException {
+		serializer.startTag("", "exercise");
+		serializer.attribute("", "type", Break.class.getName());
+		serializer.startTag("", "name");
+		serializer.text(getName());
+		serializer.endTag("", "name");
+		serializer.startTag("", "duration");
+		serializer.text(String.valueOf(getDuration()));
+		serializer.endTag("", "duration");
+		serializer.endTag("", "exercise");
+		
 		// also include Break.class, so we know that we are dealing with a Break when deserializing
 	}
 	

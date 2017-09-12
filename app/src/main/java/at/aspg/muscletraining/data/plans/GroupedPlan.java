@@ -1,5 +1,8 @@
 package at.aspg.muscletraining.data.plans;
 
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 
@@ -24,10 +27,16 @@ public class GroupedPlan extends AbstractPlan {
 	}
 	
 	@Override
-	public void serialize(OutputStream out) {
-		// TODO: out.write(BEGIN_OF_LIST)
-		IOUtil.serializeDisplayableItems(plans, out);
-		// TODO: out.write(END_OF_LIST)
+	public void serialize(XmlSerializer serializer, OutputStream out) throws IOException {
+		
 	}
+
+//	@Override
+//	public void serialize(OutputStream out) {
+//		// TODO: out.write(BEGIN_OF_LIST)
+//		IOUtil.serializeDisplayableItems(plans, out);
+//		// TODO: out.write(END_OF_LIST)
+//	}
+	
 	
 }

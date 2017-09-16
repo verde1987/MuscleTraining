@@ -1,17 +1,11 @@
 package at.aspg.muscletraining.data.plans;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import at.aspg.muscletraining.util.IOUtil;
-import at.aspg.muscletraining.util.StringUtil;
 import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.data.Weekday;
+import at.aspg.muscletraining.util.StringUtil;
 
 public class TrainingDay implements DisplayableItem {
 	
@@ -46,21 +40,21 @@ public class TrainingDay implements DisplayableItem {
 	}
 	
 	@Override
-	public void serialize(XmlSerializer serializer, OutputStream out) throws IOException {
-		serializer.startTag("", "trainingDay");
-		serializer.attribute("", "type", TrainingDay.class.getName());
-		serializer.startTag("", "name");
-		serializer.text(getName());
-		serializer.endTag("", "name");
-		serializer.startTag("", "day");
-		serializer.text(String.valueOf(getWeekday()));
-		serializer.endTag("", "day");
-		IOUtil.serializeDisplayableItems(exercises, out);
-		serializer.endTag("", "trainingDay");
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TrainingDay)) return false;
+		
+		TrainingDay that = (TrainingDay) o;
+		
+		if (day != that.day) return false;
+		return exercises != null ? exercises.equals(that.exercises) : that.exercises == null;
+		
 	}
 	
-	public static TrainingDay deserialize(InputStream in) {
-		return null;
+	@Override
+	public int hashCode() {
+		int result = day != null ? day.hashCode() : 0;
+		result = 31 * result + (exercises != null ? exercises.hashCode() : 0);
+		return result;
 	}
-	
 }

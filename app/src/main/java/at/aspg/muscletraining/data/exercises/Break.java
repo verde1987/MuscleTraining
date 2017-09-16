@@ -1,15 +1,8 @@
 package at.aspg.muscletraining.data.exercises;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import at.aspg.muscletraining.R;
-import at.aspg.muscletraining.util.AndroidUtil;
 import at.aspg.muscletraining.data.DisplayableItem;
-import at.aspg.muscletraining.util.IOUtil;
+import at.aspg.muscletraining.util.AndroidUtil;
 
 public class Break implements DisplayableItem {
 	
@@ -34,23 +27,19 @@ public class Break implements DisplayableItem {
 	}
 	
 	@Override
-	public void serialize(XmlSerializer serializer, OutputStream out) throws IOException {
-		serializer.startTag("", "exercise");
-		serializer.attribute("", "type", Break.class.getName());
-		serializer.startTag("", "name");
-		serializer.text(getName());
-		serializer.endTag("", "name");
-		serializer.startTag("", "duration");
-		serializer.text(String.valueOf(getDuration()));
-		serializer.endTag("", "duration");
-		serializer.endTag("", "exercise");
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Break)) return false;
 		
-		// also include Break.class, so we know that we are dealing with a Break when deserializing
+		Break aBreak = (Break) o;
+		
+		return duration == aBreak.duration;
+		
 	}
 	
-	// TODO: add "public static CLASS deserialize(InputStream in)" to all concrete DisplayableItem classes
-	public static Break deserialize(InputStream in) {
-		return null;
+	@Override
+	public int hashCode() {
+		return duration;
 	}
 	
 }

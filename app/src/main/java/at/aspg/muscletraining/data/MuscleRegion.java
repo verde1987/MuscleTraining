@@ -2,35 +2,21 @@ package at.aspg.muscletraining.data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
+import java.util.Collection;
 
-public enum MuscleRegion {
+public enum MuscleRegion implements IMuscleRegion {
 	
-	// special
-	SHOULDERS_1,
-	SHOUDLERS_2,
-	BELLY_1,
-	// coarse
-	SHOULDERS(SHOULDERS_1, SHOUDLERS_2),
-	BREAST,
-	ARMS,
-	BACK,
-	LEGS,
-	BELLY(BELLY_1);
+	SHOULDERS(SubMuscleRegion.SHOULDER1, SubMuscleRegion.SHOULDER2),
+	BREAST(),
+	ARMS();
 	
-	private final EnumSet<MuscleRegion> specials;
+	private final Collection<IMuscleRegion> specials = new ArrayList<>();
 	
-	MuscleRegion(MuscleRegion... specials) {
-		this.specials = EnumSet.copyOf(Arrays.asList(specials));
+	MuscleRegion(IMuscleRegion... specials) {
+		this.specials.addAll(Arrays.asList(specials));
 	}
 	
-	public EnumSet<MuscleRegion> getSpecials() {
+	public Collection<IMuscleRegion> getSpecials() {
 		return specials;
 	}
-	
-	public static EnumSet<MuscleRegion> getCoarse() {
-		// TODO: EnumSet.of(a, b);
-		return null;
-	}
-	
 }

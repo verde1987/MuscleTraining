@@ -1,10 +1,5 @@
 package at.aspg.muscletraining.data.exercises;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.IOException;
-import java.io.OutputStream;
-
 public class WeightRepsExercise extends RepsExercise implements Weight {
 	
 	private double weight;
@@ -25,9 +20,4 @@ public class WeightRepsExercise extends RepsExercise implements Weight {
 	
 	// TODO: @Override String getDetails()
 	
-	@Override
-	public void serialize(XmlSerializer serializer, OutputStream out) throws IOException {
-		// TODO: maybe can reuse from super.serialize???
-//		super.serialize(serializer);
-	}
 }

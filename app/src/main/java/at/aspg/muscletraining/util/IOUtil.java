@@ -24,17 +24,6 @@ public class IOUtil {
 	}
 	
 	public static void serializeDisplayableItems(Collection<? extends DisplayableItem> items, OutputStream out) {
-		try {
-			final XmlSerializer serializer = Xml.newSerializer(); //TODO extract to field!!
-			serializer.setOutput(out, "UTF-8");
-			serializer.startDocument("UTF-8", true);
-			for (DisplayableItem item : items) {
-				item.serialize(serializer, out);
-			}
-			serializer.endDocument();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public static Collection<DisplayableItem> deserializeDisplayableItems(InputStream in) {

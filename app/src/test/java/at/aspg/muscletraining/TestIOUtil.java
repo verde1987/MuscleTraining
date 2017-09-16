@@ -1,17 +1,20 @@
 package at.aspg.muscletraining;
 
-import static org.mockito.Mockito.*;
+import android.content.Context;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.xmlpull.v1.XmlSerializer;
+import org.robolectric.annotation.Config;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringWriter;
 import java.util.Arrays;
 
 import at.aspg.muscletraining.data.DisplayableItem;
@@ -19,80 +22,40 @@ import at.aspg.muscletraining.data.Weekday;
 import at.aspg.muscletraining.data.exercises.Break;
 import at.aspg.muscletraining.data.exercises.WeightRepsExercise;
 import at.aspg.muscletraining.data.plans.TrainingDay;
-import at.aspg.muscletraining.util.IOUtil;
+import at.aspg.muscletraining.util.AndroidUtil;
 import at.aspg.muscletraining.util.XStreamUtil;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
-//TODO check how to write tests which use android libs! (Mockito / Robolectric)
 @RunWith(RobolectricTestRunner.class)
+@Config(manifest = "app/src/main/AndroidManifest.xml")
 public class TestIOUtil {
 	
-	private StringWriter writer;
+	@Rule
+	public TemporaryFolder tempFolder = new TemporaryFolder();
+	
+	private File file;
+	
+	@Mock
+	Context mockContext;
 	
 	@Before
-	public void setUp() {
-		writer = new StringWriter();
+	public void setUp() throws IOException {
+		MockitoAnnotations.initMocks(this);
+		AndroidUtil.setContext(mockContext);
+		defineMockContext();
+		
+		file = tempFolder.newFile("tempFile.xml");
+	}
+	
+	private void defineMockContext() {
+		when(mockContext.getString(R.string._break)).thenReturn("Break");
 	}
 	
 	@After
 	public void tearDown() throws IOException {
-		writer.close();
-		writer = null;
-	}
-	
-	
-	@Test
-	public void testSerializeBreak() throws IOException {
-		//mock object
-		Break aBreak = declareBreakMock();
 		
-		IOUtil.serializeDisplayableItems(Arrays.asList(aBreak), System.out);
-		
-		// TODO uncomment this after deserialize is also implemented!
-//		Collection<DisplayableItem> displayableItems = IOUtil.deserializeDisplayableItems(System.in);
-//		Iterator<DisplayableItem> iterator = displayableItems.iterator();
-//		if(iterator.hasNext()) {
-//			DisplayableItem next = iterator.next();
-//			assertEquals(aBreak, next);
-//		}
-		assertTrue(true);
-	}
-	
-//	TODO: generic object declaration with map for methods and returns ?  -> private <T> T declareMockObject(Class<T> clazz,)
-	private Break declareBreakMock() throws IOException {
-		Break aBreak = mock(Break.class);
-		
-		//mock behaviour
-		when(aBreak.getDuration()).thenReturn(20);
-		when(aBreak.getName()).thenReturn("Break");
-		doCallRealMethod().when(aBreak).serialize(any(XmlSerializer.class), any(OutputStream.class));
-		
-		return aBreak;
-	}
-	
-	@Test
-	public void testSerializeTrainingDay() throws IOException {
-		TrainingDay day = declareTrainingDayMock();
-		
-		IOUtil.serializeDisplayableItems(Arrays.asList(day), System.out);
-	}
-	
-	private TrainingDay declareTrainingDayMock() throws IOException {
-		TrainingDay day = mock(TrainingDay.class);
-		
-		Break b = new Break();
-		b.setDuration(20);
-		Break c = new Break();
-		b.setDuration(30);
-		
-		
-		when(day.getWeekday()).thenReturn(Weekday.MONDAY);
-		when(day.getName()).thenReturn("MyTestTrainingDay");
-		when(day.getDisplayableItems()).thenReturn(Arrays.<DisplayableItem>asList(b,c));
-		doCallRealMethod().when(day).serialize(any(XmlSerializer.class), any(OutputStream.class));
-		
-		return  day;
 	}
 	
 	@Test
@@ -100,11 +63,14 @@ public class TestIOUtil {
 		Break aBreak = new Break();
 		aBreak.setDuration(20);
 		
-		XStreamUtil.serializeToXML(aBreak);
+		XStreamUtil.serializeToFile(aBreak, file);
+		DisplayableItem fromFile = XStreamUtil.deserializeFromFile(file);
+		
+		assertEquals(aBreak, fromFile);
 	}
 	
 	@Test
-	public void XStreamTest2() {
+	public void XStreamTest2() throws IOException {
 		TrainingDay day = new TrainingDay();
 		day.setWeekday(Weekday.MONDAY);
 		
@@ -122,6 +88,9 @@ public class TestIOUtil {
 		
 		day.setDisplayableItems(Arrays.asList(b,c,d));
 		
-		XStreamUtil.serializeToXML(day);
+		XStreamUtil.serializeToFile(day, file);
+		DisplayableItem fromFile = XStreamUtil.deserializeFromFile(file);
+		
+		assertEquals(day, fromFile);
 	}
 }

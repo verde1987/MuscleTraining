@@ -3,15 +3,30 @@ package at.aspg.muscletraining.util;
 import android.os.Environment;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.XStreamException;
+import com.thoughtworks.xstream.security.ArrayTypePermission;
+import com.thoughtworks.xstream.security.InterfaceTypePermission;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.text.DecimalFormatSymbols;
+import java.util.BitSet;
+import java.util.Collection;
+import java.util.Currency;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
 
-import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.data.exercises.Break;
 import at.aspg.muscletraining.data.exercises.WeightRepsExercise;
 import at.aspg.muscletraining.data.plans.TrainingDay;
@@ -23,31 +38,107 @@ public class IOUtil {
 	private IOUtil() {
 	}
 	
-	private static final XStream xStream = new XStream();
+	/**
+	 * Lazily initialized, so every access must be done via {@link #getXStream()}.
+	 */
+	private static XStream xStream;
 	
-	static {
-		xStream.alias("TrainingDay", TrainingDay.class);
-		xStream.alias("Break", Break.class);
-		xStream.alias("WeightRepsExercise", WeightRepsExercise.class);
-		//TODO add all classes here?
+	/**
+	 * Returns the XStream instance. Upon first calling this method, the instance will be
+	 * fully initialized with security setups and aliases.
+	 *
+	 * @return the XStream instance
+	 */
+	public static XStream getXStream() {
+		if (xStream == null) {
+			xStream = new XStream();
+			// set up security
+			// partly copied from static method XStream.setupDefaultSecurity(XStream)
+			// which is only available in library version >= 1.4.10
+			xStream.addPermission(NoTypePermission.NONE);
+			xStream.addPermission(NullPermission.NULL);
+			xStream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+			xStream.addPermission(ArrayTypePermission.ARRAYS);
+			xStream.addPermission(InterfaceTypePermission.INTERFACES);
+			// entire Java type hierarchies
+			xStream.allowTypeHierarchy(Collection.class);
+			xStream.allowTypeHierarchy(Map.class);
+			xStream.allowTypeHierarchy(Map.Entry.class);
+			xStream.allowTypeHierarchy(Number.class);
+			xStream.allowTypeHierarchy(Enum.class);
+			// selected single Java types
+			Set<Class<?>> types = new HashSet<>();
+			types.add(BitSet.class);
+			types.add(Charset.class);
+			types.add(Class.class);
+			types.add(Currency.class);
+			types.add(Date.class);
+			types.add(DecimalFormatSymbols.class);
+			types.add(File.class);
+			types.add(Locale.class);
+			types.add(Object.class);
+			types.add(Pattern.class);
+			types.add(StackTraceElement.class);
+			types.add(String.class);
+			types.add(StringBuffer.class);
+			types.add(URL.class);
+			types.add(URI.class);
+			xStream.allowTypes(types.toArray(new Class[0]));
+			// allow all types inside the data package (recursively)
+			xStream.allowTypesByWildcard(new String[] {
+					"at.aspg.muscletraining.data.**"
+			});
+			// set up aliases
+			xStream.alias("TrainingDay", TrainingDay.class);
+			xStream.alias("Break", Break.class);
+			xStream.alias("WeightRepsExercise", WeightRepsExercise.class);
+			//TODO add all classes here?
+		}
+		return xStream;
 	}
 	
-	public static void serializeToFile(DisplayableItem item, File file) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-		
-		String xmlString = serializeToXML(item);
-		
-		writer.write(xmlString);
-		writer.flush();
-		writer.close();
+	/**
+	 * Serializes the specified object to the specified file. If the file already exists,
+	 * it will be overwritten. If not, a new file will be created.
+	 *
+	 * @param object the object to serialize
+	 * @param file   the destination file to which the object is serialized
+	 * @throws IOException if the file cannot be created
+	 */
+	public static void serialize(Object object, File file) throws IOException {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(file);
+			getXStream().toXML(object, writer);
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+		}
 	}
 	
-	private static String serializeToXML(DisplayableItem item) {
-		return xStream.toXML(item);
-	}
-	
-	public static DisplayableItem deserializeFromFile(File file) throws NullPointerException, XStreamException {
-		return (DisplayableItem) xStream.fromXML(file);
+	/**
+	 * Deserializes an object from the specified file. The return value of this method is
+	 * generic to allow arbitrary objects to be deserialized without having to use a type
+	 * cast, e.g.:
+	 * <pre>{@code
+	 *     String string = deserialize(myFile1);
+	 *     Map<Integer, List<Date>> map = deserialize(myFile2);
+	 *     MyClass myClass = deserialize(myFile3);
+	 * }</pre>
+	 *
+	 * @param file the file from which to deserialize the object
+	 * @param <T>  the type of the deserialized object
+	 * @return the deserialized object
+	 * @throws FileNotFoundException if the specified file could not be found or if it is
+	 *                               a directory
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T deserialize(File file) throws FileNotFoundException {
+		if (!file.exists() || file.isDirectory()) {
+			throw new FileNotFoundException();
+		}
+		return (T) getXStream().fromXML(file);
 	}
 	
 	/**

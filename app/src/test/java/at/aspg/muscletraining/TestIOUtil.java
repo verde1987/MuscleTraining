@@ -35,8 +35,8 @@ public class TestIOUtil extends AbstractUnitTest {
 		Break aBreak = new Break();
 		aBreak.setDuration(20);
 		
-		IOUtil.serializeToFile(aBreak, file);
-		DisplayableItem fromFile = IOUtil.deserializeFromFile(file);
+		IOUtil.serialize(aBreak, file);
+		DisplayableItem fromFile = IOUtil.deserialize(file);
 		
 		assertEquals(aBreak, fromFile);
 	}
@@ -60,8 +60,8 @@ public class TestIOUtil extends AbstractUnitTest {
 		
 		day.setDisplayableItems(Arrays.asList(b,c,d));
 		
-		IOUtil.serializeToFile(day, file);
-		DisplayableItem fromFile = IOUtil.deserializeFromFile(file);
+		IOUtil.serialize(day, file);
+		DisplayableItem fromFile = IOUtil.deserialize(file);
 		
 		assertEquals(day, fromFile);
 	}

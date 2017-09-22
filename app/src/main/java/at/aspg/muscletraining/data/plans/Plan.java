@@ -1,12 +1,13 @@
 package at.aspg.muscletraining.data.plans;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import at.aspg.muscletraining.util.StringUtil;
 
 public class Plan extends AbstractPlan {
 	
-	private Collection<TrainingDay> trainingDays;
+	private Collection<TrainingDay> trainingDays = Collections.emptyList();
 	
 	public Collection<TrainingDay> getTrainingDays() {
 		return trainingDays;

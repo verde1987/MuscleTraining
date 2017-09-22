@@ -1,12 +1,13 @@
 package at.aspg.muscletraining.data.plans;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import at.aspg.muscletraining.util.StringUtil;
 
 public class GroupedPlan extends AbstractPlan {
 	
-	private Collection<Plan> plans;
+	private Collection<Plan> plans = Collections.emptyList();
 	
 	public Collection<Plan> getPlans() {
 		return plans;

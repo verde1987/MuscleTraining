@@ -1,7 +1,7 @@
 package at.aspg.muscletraining.data.plans;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.data.Weekday;
@@ -10,7 +10,7 @@ import at.aspg.muscletraining.util.StringUtil;
 public class TrainingDay implements DisplayableItem {
 	
 	private Weekday day;
-	private Collection<DisplayableItem> exercises = new ArrayList<>();
+	private Collection<DisplayableItem> exercises = Collections.emptyList();
 	
 	public Weekday getWeekday() {
 		return day;

@@ -58,7 +58,7 @@ public class IOUtil {
 	 *                 trying to retrieve the file from {@code INT/subdir/myFile.txt}, the
 	 *                 specified {@code filename} would be {@code subdir/myFile.txt})
 	 * @return the specified file from the internal storage
-	 * @throws FileNotFoundException      if the specified file could not be found
+	 * @throws FileNotFoundException if the specified file could not be found
 	 */
 	public static File getReadableInternalFile(String filename) throws FileNotFoundException {
 		ObjectUtil.requireNonNull(filename);

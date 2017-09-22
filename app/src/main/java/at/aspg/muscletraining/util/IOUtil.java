@@ -1,20 +1,20 @@
 package at.aspg.muscletraining.util;
 
 import android.os.Environment;
-import android.util.Xml;
 
-import org.xmlpull.v1.XmlSerializer;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
 
-import java.io.Closeable;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Collection;
 
 import at.aspg.muscletraining.data.DisplayableItem;
+import at.aspg.muscletraining.data.exercises.Break;
+import at.aspg.muscletraining.data.exercises.WeightRepsExercise;
+import at.aspg.muscletraining.data.plans.TrainingDay;
 import at.aspg.muscletraining.exceptions.ExternalStorageNotReadable;
 import at.aspg.muscletraining.exceptions.ExternalStorageNotWritable;
 
@@ -23,21 +23,31 @@ public class IOUtil {
 	private IOUtil() {
 	}
 	
-	public static void serializeDisplayableItems(Collection<? extends DisplayableItem> items, OutputStream out) {
+	private static final XStream xStream = new XStream();
+	
+	static {
+		xStream.alias("TrainingDay", TrainingDay.class);
+		xStream.alias("Break", Break.class);
+		xStream.alias("WeightRepsExercise", WeightRepsExercise.class);
+		//TODO add all classes here?
 	}
 	
-	public static Collection<DisplayableItem> deserializeDisplayableItems(InputStream in) {
-		// TODO
-		/*
-		switch (in.nextElement)
-			case Break:
-				newItem = Break.deserialize(in);
-				collection.add(newItem)
+	public static void serializeToFile(DisplayableItem item, File file) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		
+		String xmlString = serializeToXML(item);
 		
-		return collection;
-		 */
-		return null;
+		writer.write(xmlString);
+		writer.flush();
+		writer.close();
+	}
+	
+	private static String serializeToXML(DisplayableItem item) {
+		return xStream.toXML(item);
+	}
+	
+	public static DisplayableItem deserializeFromFile(File file) throws NullPointerException, XStreamException {
+		return (DisplayableItem) xStream.fromXML(file);
 	}
 	
 	/**

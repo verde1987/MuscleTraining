@@ -1,17 +1,8 @@
 package at.aspg.muscletraining;
 
-import android.content.Context;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,49 +13,30 @@ import at.aspg.muscletraining.data.Weekday;
 import at.aspg.muscletraining.data.exercises.Break;
 import at.aspg.muscletraining.data.exercises.WeightRepsExercise;
 import at.aspg.muscletraining.data.plans.TrainingDay;
-import at.aspg.muscletraining.util.AndroidUtil;
-import at.aspg.muscletraining.util.XStreamUtil;
+import at.aspg.muscletraining.util.IOUtil;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
-@Config(manifest = "app/src/main/AndroidManifest.xml")
-public class TestIOUtil {
+public class TestIOUtil extends AbstractUnitTest {
 	
 	@Rule
 	public TemporaryFolder tempFolder = new TemporaryFolder();
 	
 	private File file;
 	
-	@Mock
-	Context mockContext;
-	
-	@Before
-	public void setUp() throws IOException {
-		MockitoAnnotations.initMocks(this);
-		AndroidUtil.setContext(mockContext);
-		defineMockContext();
-		
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
 		file = tempFolder.newFile("tempFile.xml");
 	}
-	
-	private void defineMockContext() {
-		when(mockContext.getString(R.string._break)).thenReturn("Break");
-	}
-	
-	@After
-	public void tearDown() throws IOException {
-		
-	}
-	
+
 	@Test
 	public void XStreamTest() throws IOException {
 		Break aBreak = new Break();
 		aBreak.setDuration(20);
 		
-		XStreamUtil.serializeToFile(aBreak, file);
-		DisplayableItem fromFile = XStreamUtil.deserializeFromFile(file);
+		IOUtil.serializeToFile(aBreak, file);
+		DisplayableItem fromFile = IOUtil.deserializeFromFile(file);
 		
 		assertEquals(aBreak, fromFile);
 	}
@@ -88,8 +60,8 @@ public class TestIOUtil {
 		
 		day.setDisplayableItems(Arrays.asList(b,c,d));
 		
-		XStreamUtil.serializeToFile(day, file);
-		DisplayableItem fromFile = XStreamUtil.deserializeFromFile(file);
+		IOUtil.serializeToFile(day, file);
+		DisplayableItem fromFile = IOUtil.deserializeFromFile(file);
 		
 		assertEquals(day, fromFile);
 	}

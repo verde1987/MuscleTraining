@@ -1,8 +1,31 @@
 package at.aspg.muscletraining.data;
 
 public enum SubMuscleRegion implements IMuscleRegion {
-
-	SHOULDER1,
-	SHOULDER2
 	
+	FRONT_SHOULDER,
+	SIDE_SHOULDER,
+	BACK_SHOULDER,
+	
+	LOWER_BACK,
+	LATISSIMUS,
+	NECK, // TRAPS?
+	
+	MIDDLE_CHEST,
+	UPPER_CHEST,
+	LOWER_CHEST,
+	SERRATUS_ANTERIOR, // Sägemuskel
+	
+	BICEPS,
+	TRICEPS,
+	FOREARM,
+	
+	UPPER_ABS,
+	LOWER_ABS,
+	SIDE_ABS,
+	
+	ABDUCTORS,
+	GLUTEUS_MAXIMUS,
+	
+	THIGHS,
+	CALVES
 }

@@ -51,6 +51,43 @@ public class IOUtil {
 	}
 	
 	/**
+	 * Returns the specified file from the internal storage for read access.
+	 *
+	 * @param filename the name of the file (may include subdirectories in case the file
+	 *                 was stored in a subdirectory on the internal storage, e.g., when
+	 *                 trying to retrieve the file from {@code INT/subdir/myFile.txt}, the
+	 *                 specified {@code filename} would be {@code subdir/myFile.txt})
+	 * @return the specified file from the internal storage
+	 * @throws FileNotFoundException      if the specified file could not be found
+	 */
+	public static File getReadableInternalFile(String filename) throws FileNotFoundException {
+		ObjectUtil.requireNonNull(filename);
+		File internalRootDir = AndroidUtil.getContext().getFilesDir();
+		File file = new File(internalRootDir, filename);
+		if (!file.exists()) {
+			throw new FileNotFoundException();
+		}
+		return file;
+	}
+	
+	/**
+	 * Returns the specified file from the internal storage for write access. {@link
+	 * File#exists()} might return {@code false} in case the specified file does not
+	 * exist.
+	 *
+	 * @param filename the name of the file (may include subdirectories in case the file
+	 *                 was stored in a subdirectory on the internal storage, e.g., when
+	 *                 trying to retrieve the file from {@code INT/subdir/myFile.txt}, the
+	 *                 specified {@code filename} would be {@code subdir/myFile.txt})
+	 * @return the specified file from the internal storage
+	 */
+	public static File getWritableInternalFile(String filename) {
+		ObjectUtil.requireNonNull(filename);
+		File internalRootDir = AndroidUtil.getContext().getExternalFilesDir(null);
+		return new File(internalRootDir, filename);
+	}
+	
+	/**
 	 * Checks if the external storage is available for read and write access.
 	 * <p>
 	 * If this methods yields {@code true}, {@link #isExternalStorageReadable()} yields

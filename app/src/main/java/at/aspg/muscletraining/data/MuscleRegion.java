@@ -16,10 +16,10 @@ public enum MuscleRegion implements IMuscleRegion {
 	GLUTES(ABDUCTORS, GLUTEUS_MAXIMUS),
 	LEGS(THIGHS, CALVES);
 	
-	private final Collection<IMuscleRegion> specials = new ArrayList<>();
+	private final Collection<IMuscleRegion> specials;
 	
 	MuscleRegion(IMuscleRegion... specials) {
-		this.specials.addAll(Arrays.asList(specials));
+		this.specials = Arrays.asList(specials);
 	}
 	
 	public Collection<IMuscleRegion> getSpecials() {

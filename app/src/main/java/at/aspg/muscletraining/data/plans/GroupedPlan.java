@@ -1,20 +1,21 @@
 package at.aspg.muscletraining.data.plans;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import at.aspg.muscletraining.util.StringUtil;
 
 public class GroupedPlan extends AbstractPlan {
 	
-	private Collection<Plan> plans = Collections.emptyList();
+	private List<Plan> plans = new ArrayList<>();
 	
-	public Collection<Plan> getPlans() {
+	public List<Plan> getPlans() {
 		return plans;
 	}
 	
-	public void setPlans(Collection<Plan> plans) {
-		this.plans = plans;
+	public void addPlans(Plan... plans) {
+		Collections.addAll(this.plans, plans);
 	}
 	
 	@Override

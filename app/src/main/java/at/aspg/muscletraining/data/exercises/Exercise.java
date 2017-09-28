@@ -18,6 +18,8 @@ public abstract class Exercise implements DisplayableItem {
 	private Collection<IMuscleRegion> primaryMuscleRegions;
 	private Collection<IMuscleRegion> secondaryMuscleRegions;
 	
+	// TODO: copy constructor
+	
 	public Exercise() {
 		name = AndroidUtil.getString(R.string.default_exercise);
 		description = "";

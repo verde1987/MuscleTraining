@@ -60,4 +60,29 @@ public abstract class Exercise implements DisplayableItem {
 		this.secondaryMuscleRegions = secondaryMuscleRegions;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Exercise)) return false;
+		
+		Exercise exercise = (Exercise) o;
+		
+		if (name != null ? !name.equals(exercise.name) : exercise.name != null)
+			return false;
+		if (description != null ? !description.equals(exercise.description) : exercise.description != null)
+			return false;
+		if (primaryMuscleRegions != null ? !primaryMuscleRegions.equals(exercise.primaryMuscleRegions) : exercise.primaryMuscleRegions != null)
+			return false;
+		return secondaryMuscleRegions != null ? secondaryMuscleRegions.equals(exercise.secondaryMuscleRegions) : exercise.secondaryMuscleRegions == null;
+		
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (primaryMuscleRegions != null ? primaryMuscleRegions.hashCode() : 0);
+		result = 31 * result + (secondaryMuscleRegions != null ? secondaryMuscleRegions.hashCode() : 0);
+		return result;
+	}
 }

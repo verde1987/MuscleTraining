@@ -21,4 +21,21 @@ public class RepsExercise extends SetsExercise {
 		return null;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof RepsExercise)) return false;
+		if (!super.equals(o)) return false;
+		
+		RepsExercise that = (RepsExercise) o;
+		
+		return reps == that.reps;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + reps;
+		return result;
+	}
 }

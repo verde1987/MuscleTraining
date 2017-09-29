@@ -23,4 +23,22 @@ public class CardioExercise extends Exercise implements Duration {
 		return null;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CardioExercise)) return false;
+		if (!super.equals(o)) return false;
+		
+		CardioExercise that = (CardioExercise) o;
+		
+		return duration == that.duration;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + duration;
+		return result;
+	}
+	
 }

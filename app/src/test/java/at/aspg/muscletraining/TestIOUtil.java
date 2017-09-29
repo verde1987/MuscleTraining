@@ -57,8 +57,7 @@ public class TestIOUtil extends AbstractUnitTest {
 		d.setDescription("I fucking have no clue!");
 		d.setReps(12);
 		
-		
-		day.setDisplayableItems(Arrays.asList(b,c,d));
+		day.addDisplayableItems(b, c, d);
 		
 		IOUtil.serialize(day, file);
 		DisplayableItem fromFile = IOUtil.deserialize(file);

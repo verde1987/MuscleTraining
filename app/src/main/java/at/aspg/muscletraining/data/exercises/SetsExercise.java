@@ -26,4 +26,23 @@ public abstract class SetsExercise extends Exercise {
 		this.breakTime = breakTime;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof SetsExercise)) return false;
+		if (!super.equals(o)) return false;
+		
+		SetsExercise that = (SetsExercise) o;
+		
+		if (sets != that.sets) return false;
+		return breakTime == that.breakTime;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + sets;
+		result = 31 * result + breakTime;
+		return result;
+	}
 }

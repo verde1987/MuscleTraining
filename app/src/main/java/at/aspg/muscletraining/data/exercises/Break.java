@@ -34,7 +34,6 @@ public class Break implements DisplayableItem {
 		Break aBreak = (Break) o;
 		
 		return duration == aBreak.duration;
-		
 	}
 	
 	@Override

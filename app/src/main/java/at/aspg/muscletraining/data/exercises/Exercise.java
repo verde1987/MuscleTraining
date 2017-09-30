@@ -1,22 +1,21 @@
 package at.aspg.muscletraining.data.exercises;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
+import java.util.List;
 
 import at.aspg.muscletraining.R;
+import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.data.IMuscleRegion;
 import at.aspg.muscletraining.util.AndroidUtil;
-import at.aspg.muscletraining.data.DisplayableItem;
-import at.aspg.muscletraining.data.MuscleRegion;
+import at.aspg.muscletraining.util.ObjectUtil;
 
 public abstract class Exercise implements DisplayableItem {
 	
 	private String name;
 	private String description;
-	private Collection<IMuscleRegion> primaryMuscleRegions;
-	private Collection<IMuscleRegion> secondaryMuscleRegions;
+	private List<IMuscleRegion> primaryMuscleRegions;
+	private List<IMuscleRegion> secondaryMuscleRegions;
 	
 	// TODO: copy constructor
 	
@@ -33,7 +32,7 @@ public abstract class Exercise implements DisplayableItem {
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.name = ObjectUtil.requireNonNull(name);
 	}
 	
 	public String getDescription() {
@@ -41,23 +40,25 @@ public abstract class Exercise implements DisplayableItem {
 	}
 	
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = ObjectUtil.requireNonNull(description);
 	}
 	
-	public Collection<IMuscleRegion> getPrimaryMuscleRegions() {
+	public List<IMuscleRegion> getPrimaryMuscleRegions() {
 		return primaryMuscleRegions;
 	}
 	
-	public void setPrimaryMuscleRegions(Collection<IMuscleRegion> primaryMuscleRegions) {
-		this.primaryMuscleRegions = primaryMuscleRegions;
+	public void addPrimaryMuscleRegions(IMuscleRegion... primaryMuscleRegions) {
+		ObjectUtil.requireNonNullArray(primaryMuscleRegions);
+		Collections.addAll(this.primaryMuscleRegions, primaryMuscleRegions);
 	}
 	
-	public Collection<IMuscleRegion> getSecondaryMuscleRegions() {
+	public List<IMuscleRegion> getSecondaryMuscleRegions() {
 		return secondaryMuscleRegions;
 	}
 	
-	public void setSecondaryMuscleRegions(Collection<IMuscleRegion> secondaryMuscleRegions) {
-		this.secondaryMuscleRegions = secondaryMuscleRegions;
+	public void addSecondaryMuscleRegions(IMuscleRegion... secondaryMuscleRegions) {
+		ObjectUtil.requireNonNullArray(secondaryMuscleRegions);
+		Collections.addAll(this.secondaryMuscleRegions, secondaryMuscleRegions);
 	}
 	
 	@Override

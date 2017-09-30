@@ -3,6 +3,7 @@ package at.aspg.muscletraining.data.plans;
 import at.aspg.muscletraining.R;
 import at.aspg.muscletraining.util.AndroidUtil;
 import at.aspg.muscletraining.data.DisplayableItem;
+import at.aspg.muscletraining.util.ObjectUtil;
 
 public abstract class AbstractPlan implements DisplayableItem {
 	
@@ -18,7 +19,7 @@ public abstract class AbstractPlan implements DisplayableItem {
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.name = ObjectUtil.requireNonNull(name);
 	}
 	
 }

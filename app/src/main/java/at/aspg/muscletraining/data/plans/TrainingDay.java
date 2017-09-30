@@ -20,7 +20,7 @@ public class TrainingDay implements DisplayableItem {
 	}
 	
 	public void setWeekday(Weekday weekday) {
-		this.day = weekday;
+		this.day = ObjectUtil.requireNonNull(weekday);
 	}
 	
 	public List<DisplayableItem> getDisplayableItems() {

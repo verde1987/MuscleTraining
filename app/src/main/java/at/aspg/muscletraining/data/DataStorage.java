@@ -14,7 +14,7 @@ import at.aspg.muscletraining.util.ObjectUtil;
 public class DataStorage {
 	
 	private static final String PLANS_FILENAME = "plans/plans.xml";
-	private static final String EXERCISES_FILENAME = "exercise/exercise.xml";
+	private static final String EXERCISES_FILENAME = "exercise/exercises.xml";
 	
 	private static DataStorage instance = null;
 	

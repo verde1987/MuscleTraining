@@ -9,7 +9,20 @@ import at.aspg.muscletraining.util.StringUtil;
 
 public class GroupedPlan extends AbstractPlan {
 	
-	private List<Plan> plans = new ArrayList<>();
+	private final List<Plan> plans;
+	
+	public GroupedPlan() {
+		plans = new ArrayList<>();
+	}
+	
+	protected GroupedPlan(GroupedPlan toCopy) {
+		super(toCopy);
+		// make a deep copy of the plans-list
+		plans = new ArrayList<>();
+		for (Plan plan : toCopy.plans) {
+			plans.add(plan.copy());
+		}
+	}
 	
 	public List<Plan> getPlans() {
 		return plans;
@@ -23,6 +36,11 @@ public class GroupedPlan extends AbstractPlan {
 	@Override
 	public String getDetails() {
 		return StringUtil.join(plans, " | ");
+	}
+	
+	@Override
+	public GroupedPlan copy() {
+		return new GroupedPlan(this);
 	}
 	
 }

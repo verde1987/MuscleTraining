@@ -13,7 +13,21 @@ import at.aspg.muscletraining.util.StringUtil;
 public class TrainingDay implements DisplayableItem {
 	
 	private Weekday day;
-	private List<DisplayableItem> exercises = new ArrayList<>();
+	private final List<DisplayableItem> exercises;
+	
+	public TrainingDay() {
+		exercises = new ArrayList<>();
+	}
+	
+	protected TrainingDay(TrainingDay toCopy) {
+		ObjectUtil.requireNonNull(toCopy);
+		day = toCopy.day;
+		// make a deep copy of the exercises-list
+		exercises = new ArrayList<>();
+		for (DisplayableItem item : toCopy.exercises) {
+			exercises.add(item.copy());
+		}
+	}
 	
 	public Weekday getWeekday() {
 		return day;
@@ -40,6 +54,11 @@ public class TrainingDay implements DisplayableItem {
 	@Override
 	public String getDetails() {
 		return StringUtil.join(exercises, " | ");
+	}
+	
+	@Override
+	public TrainingDay copy() {
+		return new TrainingDay(this);
 	}
 	
 	@Override

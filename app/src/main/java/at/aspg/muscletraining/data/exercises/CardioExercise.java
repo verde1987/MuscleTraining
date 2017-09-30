@@ -10,6 +10,11 @@ public class CardioExercise extends Exercise implements Duration {
 		duration = 0;
 	}
 	
+	protected CardioExercise(CardioExercise toCopy) {
+		super(toCopy);
+		duration = toCopy.duration;
+	}
+	
 	@Override
 	public int getDuration() {
 		return duration;
@@ -23,6 +28,11 @@ public class CardioExercise extends Exercise implements Duration {
 	@Override
 	public String getDetails() {
 		return null;
+	}
+	
+	@Override
+	public CardioExercise copy() {
+		return new CardioExercise(this);
 	}
 	
 	@Override

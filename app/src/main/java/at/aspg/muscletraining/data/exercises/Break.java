@@ -4,10 +4,20 @@ import at.aspg.muscletraining.R;
 import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.util.AndroidUtil;
 import at.aspg.muscletraining.util.NumberUtil;
+import at.aspg.muscletraining.util.ObjectUtil;
 
 public class Break implements DisplayableItem {
 	
 	private int duration;
+	
+	public Break() {
+		duration = 0;
+	}
+	
+	protected Break(Break toCopy) {
+		ObjectUtil.requireNonNull(toCopy);
+		duration = toCopy.duration;
+	}
 	
 	public int getDuration() {
 		return duration;
@@ -25,6 +35,11 @@ public class Break implements DisplayableItem {
 	@Override
 	public String getDetails() {
 		return "";
+	}
+	
+	@Override
+	public Break copy() {
+		return new Break(this);
 	}
 	
 	@Override

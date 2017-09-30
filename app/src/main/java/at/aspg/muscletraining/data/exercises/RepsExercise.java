@@ -10,6 +10,11 @@ public class RepsExercise extends SetsExercise {
 		reps = 0;
 	}
 	
+	protected RepsExercise(RepsExercise toCopy) {
+		super(toCopy);
+		reps = toCopy.reps;
+	}
+	
 	public int getReps() {
 		return reps;
 	}
@@ -21,6 +26,11 @@ public class RepsExercise extends SetsExercise {
 	@Override
 	public String getDetails() {
 		return null;
+	}
+	
+	@Override
+	public RepsExercise copy() {
+		return new RepsExercise(this);
 	}
 	
 	@Override

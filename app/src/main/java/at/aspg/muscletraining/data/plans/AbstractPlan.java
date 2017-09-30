@@ -13,6 +13,11 @@ public abstract class AbstractPlan implements DisplayableItem {
 		name = AndroidUtil.getString(R.string.default_plan);
 	}
 	
+	protected AbstractPlan(AbstractPlan toCopy) {
+		ObjectUtil.requireNonNull(toCopy);
+		name = toCopy.name;
+	}
+	
 	@Override
 	public String getName() {
 		return name;

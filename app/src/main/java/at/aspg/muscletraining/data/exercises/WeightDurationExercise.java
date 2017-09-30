@@ -10,6 +10,11 @@ public class WeightDurationExercise extends DurationExercise implements Weight {
 		weight = 0;
 	}
 	
+	protected WeightDurationExercise(WeightDurationExercise toCopy) {
+		super(toCopy);
+		weight = toCopy.weight;
+	}
+	
 	@Override
 	public double getWeight() {
 		return weight;
@@ -18,6 +23,11 @@ public class WeightDurationExercise extends DurationExercise implements Weight {
 	@Override
 	public void setWeight(double weight) {
 		this.weight = NumberUtil.checkRangeLowerBound(weight, 0);
+	}
+	
+	@Override
+	public WeightDurationExercise copy() {
+		return new WeightDurationExercise(this);
 	}
 	
 	@Override

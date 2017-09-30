@@ -17,13 +17,31 @@ public abstract class Exercise implements DisplayableItem {
 	private List<IMuscleRegion> primaryMuscleRegions;
 	private List<IMuscleRegion> secondaryMuscleRegions;
 	
-	// TODO: copy constructor
-	
 	public Exercise() {
 		name = AndroidUtil.getString(R.string.default_exercise);
 		description = "";
 		primaryMuscleRegions = new ArrayList<>();
 		secondaryMuscleRegions = new ArrayList<>();
+	}
+	
+	/**
+	 * Creates a new Exercise instance which will be a 1:1 copy of the specified Exercise,
+	 * i.e., the following will be true:
+	 * <pre>
+	 *     Exercise existingExercise = ...;
+	 *     Exercise copy = new Exercise(existingExercise);
+	 *     copy.equals(existingExercise)
+	 * </pre>
+	 * Naturally, changes to the new Exercise will <i>not</i> be reflected in the original
+	 * Exercise.
+	 */
+	protected Exercise(Exercise toCopy) {
+		ObjectUtil.requireNonNull(toCopy);
+		name = toCopy.name;
+		description = toCopy.description;
+		// no deep copy of muscle regions necessary since they are enums and thus immutable
+		primaryMuscleRegions = new ArrayList<>(toCopy.primaryMuscleRegions);
+		secondaryMuscleRegions = new ArrayList<>(toCopy.secondaryMuscleRegions);
 	}
 	
 	@Override

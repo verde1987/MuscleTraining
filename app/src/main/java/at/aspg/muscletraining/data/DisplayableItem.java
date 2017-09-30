@@ -15,6 +15,17 @@ public interface DisplayableItem {
 	 */
 	String getDetails();
 	
+	/**
+	 * Creates a copy of {@code this} DisplayableItem. The returned instance must be a new
+	 * instance for which changes <i>must not</i> be reflected in {@code this}
+	 * DisplayableItem (the original which is copied with this method). Subclasses are
+	 * encouraged to change the return type of this method to the corresponding type of
+	 * the subclass.
+	 *
+	 * @return a copy of {@code this} DisplayableItem
+	 */
+	DisplayableItem copy();
+	
 	// TODO: icon ---> int getIconResource(); ?
 	
 }

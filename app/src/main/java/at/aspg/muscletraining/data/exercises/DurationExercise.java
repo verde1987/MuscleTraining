@@ -10,6 +10,11 @@ public class DurationExercise extends SetsExercise implements Duration {
 		duration = 0;
 	}
 	
+	protected DurationExercise(DurationExercise toCopy) {
+		super(toCopy);
+		duration = toCopy.duration;
+	}
+	
 	@Override
 	public int getDuration() {
 		return duration;
@@ -23,6 +28,11 @@ public class DurationExercise extends SetsExercise implements Duration {
 	@Override
 	public String getDetails() {
 		return null;
+	}
+	
+	@Override
+	public DurationExercise copy() {
+		return new DurationExercise(this);
 	}
 	
 	@Override

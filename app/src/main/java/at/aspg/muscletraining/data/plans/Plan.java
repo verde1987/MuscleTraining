@@ -9,7 +9,20 @@ import at.aspg.muscletraining.util.StringUtil;
 
 public class Plan extends AbstractPlan {
 	
-	private List<TrainingDay> trainingDays = new ArrayList<>();
+	private final List<TrainingDay> trainingDays;
+	
+	public Plan() {
+		trainingDays = new ArrayList<>();
+	}
+	
+	protected Plan(Plan toCopy) {
+		super(toCopy);
+		// make a deep copy of the trainingDays-list
+		trainingDays = new ArrayList<>();
+		for (TrainingDay trainingDay : toCopy.trainingDays) {
+			trainingDays.add(trainingDay.copy());
+		}
+	}
 	
 	public List<TrainingDay> getTrainingDays() {
 		return trainingDays;
@@ -25,4 +38,8 @@ public class Plan extends AbstractPlan {
 		return StringUtil.join(trainingDays, " | ");
 	}
 	
+	@Override
+	public Plan copy() {
+		return new Plan(this);
+	}
 }

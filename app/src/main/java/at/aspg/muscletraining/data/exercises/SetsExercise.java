@@ -12,6 +12,12 @@ public abstract class SetsExercise extends Exercise {
 		breakTime = 0;
 	}
 	
+	protected SetsExercise(SetsExercise toCopy) {
+		super(toCopy);
+		sets = toCopy.sets;
+		breakTime = toCopy.breakTime;
+	}
+	
 	public int getSets() {
 		return sets;
 	}

@@ -10,6 +10,11 @@ public class WeightRepsExercise extends RepsExercise implements Weight {
 		weight = 0;
 	}
 	
+	protected WeightRepsExercise(WeightRepsExercise toCopy) {
+		super(toCopy);
+		weight = toCopy.weight;
+	}
+	
 	@Override
 	public double getWeight() {
 		return weight;
@@ -18,6 +23,11 @@ public class WeightRepsExercise extends RepsExercise implements Weight {
 	@Override
 	public void setWeight(double weight) {
 		this.weight = NumberUtil.checkRangeLowerBound(weight, 0);
+	}
+	
+	@Override
+	public WeightRepsExercise copy() {
+		return new WeightRepsExercise(this);
 	}
 	
 	@Override

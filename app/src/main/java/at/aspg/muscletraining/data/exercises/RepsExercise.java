@@ -10,6 +10,10 @@ public class RepsExercise extends SetsExercise {
 		reps = 0;
 	}
 	
+	public RepsExercise(RepsExercise blueprint) {
+		super(blueprint);
+	}
+	
 	public int getReps() {
 		return reps;
 	}

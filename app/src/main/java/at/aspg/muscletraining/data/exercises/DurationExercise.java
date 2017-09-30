@@ -10,6 +10,10 @@ public class DurationExercise extends SetsExercise implements Duration {
 		duration = 0;
 	}
 	
+	public DurationExercise(DurationExercise blueprint) {
+		super(blueprint);
+	}
+	
 	@Override
 	public int getDuration() {
 		return duration;

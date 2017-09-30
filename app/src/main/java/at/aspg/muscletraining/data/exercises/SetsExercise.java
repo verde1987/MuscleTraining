@@ -12,6 +12,10 @@ public abstract class SetsExercise extends Exercise {
 		breakTime = 0;
 	}
 	
+	public SetsExercise(SetsExercise blueprint) {
+		super(blueprint);
+	}
+	
 	public int getSets() {
 		return sets;
 	}

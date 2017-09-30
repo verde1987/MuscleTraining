@@ -17,13 +17,19 @@ public abstract class Exercise implements DisplayableItem {
 	private List<IMuscleRegion> primaryMuscleRegions;
 	private List<IMuscleRegion> secondaryMuscleRegions;
 	
-	// TODO: copy constructor
-	
 	public Exercise() {
 		name = AndroidUtil.getString(R.string.default_exercise);
 		description = "";
 		primaryMuscleRegions = new ArrayList<>();
 		secondaryMuscleRegions = new ArrayList<>();
+	}
+	
+	public Exercise(Exercise blueprint) {
+		ObjectUtil.requireNonNull(blueprint);
+		name = blueprint.getName();
+		description = blueprint.getDescription();
+		primaryMuscleRegions = blueprint.getPrimaryMuscleRegions();
+		secondaryMuscleRegions = blueprint.getSecondaryMuscleRegions();
 	}
 	
 	@Override

@@ -10,6 +10,10 @@ public class CardioExercise extends Exercise implements Duration {
 		duration = 0;
 	}
 	
+	public CardioExercise(CardioExercise blueprint) {
+		super(blueprint);
+	}
+	
 	@Override
 	public int getDuration() {
 		return duration;

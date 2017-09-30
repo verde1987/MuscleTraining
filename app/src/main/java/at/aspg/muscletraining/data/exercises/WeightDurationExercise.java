@@ -10,6 +10,10 @@ public class WeightDurationExercise extends DurationExercise implements Weight {
 		weight = 0;
 	}
 	
+	public WeightDurationExercise(WeightDurationExercise blueprint) {
+		super(blueprint);
+	}
+	
 	@Override
 	public double getWeight() {
 		return weight;

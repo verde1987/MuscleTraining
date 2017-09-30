@@ -10,6 +10,10 @@ public class WeightRepsExercise extends RepsExercise implements Weight {
 		weight = 0;
 	}
 	
+	public WeightRepsExercise(WeightRepsExercise blueprint) {
+		super(blueprint);
+	}
+	
 	@Override
 	public double getWeight() {
 		return weight;

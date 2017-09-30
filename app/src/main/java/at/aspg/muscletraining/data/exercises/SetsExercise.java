@@ -1,5 +1,7 @@
 package at.aspg.muscletraining.data.exercises;
 
+import at.aspg.muscletraining.util.NumberUtil;
+
 public abstract class SetsExercise extends Exercise {
 	
 	private int sets;
@@ -15,7 +17,7 @@ public abstract class SetsExercise extends Exercise {
 	}
 	
 	public void setSets(int sets) {
-		this.sets = sets;
+		this.sets = NumberUtil.checkRangeLowerBound(sets, 0);
 	}
 	
 	public int getBreakTime() {
@@ -23,7 +25,7 @@ public abstract class SetsExercise extends Exercise {
 	}
 	
 	public void setBreakTime(int breakTime) {
-		this.breakTime = breakTime;
+		this.breakTime = NumberUtil.checkRangeLowerBound(breakTime, 0);
 	}
 	
 	@Override

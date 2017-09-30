@@ -1,5 +1,7 @@
 package at.aspg.muscletraining.data.exercises;
 
+import at.aspg.muscletraining.util.NumberUtil;
+
 public class WeightDurationExercise extends DurationExercise implements Weight {
 	
 	private double weight;
@@ -15,7 +17,7 @@ public class WeightDurationExercise extends DurationExercise implements Weight {
 	
 	@Override
 	public void setWeight(double weight) {
-		this.weight = weight;
+		this.weight = NumberUtil.checkRangeLowerBound(weight, 0);
 	}
 	
 	@Override

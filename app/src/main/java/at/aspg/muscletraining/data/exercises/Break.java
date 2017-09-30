@@ -3,6 +3,7 @@ package at.aspg.muscletraining.data.exercises;
 import at.aspg.muscletraining.R;
 import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.util.AndroidUtil;
+import at.aspg.muscletraining.util.NumberUtil;
 
 public class Break implements DisplayableItem {
 	
@@ -13,7 +14,7 @@ public class Break implements DisplayableItem {
 	}
 	
 	public void setDuration(int duration) {
-		this.duration = duration;
+		this.duration = NumberUtil.checkRangeLowerBound(duration, 0);
 	}
 	
 	@Override

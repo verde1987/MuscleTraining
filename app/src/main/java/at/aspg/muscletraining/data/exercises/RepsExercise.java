@@ -1,5 +1,7 @@
 package at.aspg.muscletraining.data.exercises;
 
+import at.aspg.muscletraining.util.NumberUtil;
+
 public class RepsExercise extends SetsExercise {
 	
 	private int reps;
@@ -13,7 +15,7 @@ public class RepsExercise extends SetsExercise {
 	}
 	
 	public void setReps(int reps) {
-		this.reps = reps;
+		this.reps = NumberUtil.checkRangeLowerBound(reps, 0);
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package at.aspg.muscletraining.data.exercises;
 
+import at.aspg.muscletraining.util.NumberUtil;
+
 public class CardioExercise extends Exercise implements Duration {
 	
 	private int duration;
@@ -15,7 +17,7 @@ public class CardioExercise extends Exercise implements Duration {
 	
 	@Override
 	public void setDuration(int duration) {
-		this.duration = duration;
+		this.duration = NumberUtil.checkRangeLowerBound(duration, 0);
 	}
 	
 	@Override

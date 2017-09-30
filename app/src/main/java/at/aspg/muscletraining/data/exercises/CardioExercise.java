@@ -10,6 +10,7 @@ public class CardioExercise extends Exercise implements Duration {
 		duration = 0;
 	}
 	
+
 	protected CardioExercise(CardioExercise toCopy) {
 		super(toCopy);
 		duration = toCopy.duration;

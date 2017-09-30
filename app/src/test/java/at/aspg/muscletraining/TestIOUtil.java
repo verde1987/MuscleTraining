@@ -60,7 +60,7 @@ public class TestIOUtil extends AbstractUnitTest {
 		day.addDisplayableItems(b, c, d);
 		
 		IOUtil.serialize(day, file);
-		DisplayableItem fromFile = IOUtil.deserialize(file);
+		TrainingDay fromFile = IOUtil.deserialize(file);
 		
 		assertEquals(day, fromFile);
 	}

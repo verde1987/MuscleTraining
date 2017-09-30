@@ -16,7 +16,7 @@ public class Plan extends AbstractPlan {
 	}
 	
 	public void addTrainingDays(TrainingDay... days) {
-		// ObjectUtil.requireNonNulls(days);
+		ObjectUtil.requireNonNullArray(days);
 		Collections.addAll(trainingDays, days);
 	}
 	

@@ -7,6 +7,7 @@ import java.util.List;
 
 import at.aspg.muscletraining.data.DisplayableItem;
 import at.aspg.muscletraining.data.Weekday;
+import at.aspg.muscletraining.util.ObjectUtil;
 import at.aspg.muscletraining.util.StringUtil;
 
 public class TrainingDay implements DisplayableItem {
@@ -27,7 +28,7 @@ public class TrainingDay implements DisplayableItem {
 	}
 	
 	public void addDisplayableItems(DisplayableItem... items) {
-		// TODO: require non null
+		ObjectUtil.requireNonNullArray(items);
 		Collections.addAll(exercises, items);
 	}
 	

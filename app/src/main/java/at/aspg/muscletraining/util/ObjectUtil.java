@@ -3,6 +3,7 @@ package at.aspg.muscletraining.util;
 public class ObjectUtil {
 	
 	// copied from java.util.Objects due to API restrictions
+	
 	/**
 	 * Checks that the specified object is not {@code null} and returns the same object
 	 * again if it is not {@code null}. This method is designed primarily for doing
@@ -35,15 +36,39 @@ public class ObjectUtil {
 	 * }
 	 * </pre>
 	 *
-	 * @param objects the objects to check for {@code null}
+	 * @param object  the first object to check for {@code null}
+	 * @param objects the other objects to check for {@code null}
 	 * @throws NullPointerException if any of the objects is {@code null}
 	 */
-	public static void requireNonNull(Object... objects) {
-		for (Object o : objects) {
+	public static void requireNonNull(Object object, Object... objects) {
+		requireNonNull(object);
+		requireNonNullArray(objects);
+	}
+	
+	/**
+	 * Checks that the objects in the specified array are not {@code null}. The array
+	 * itself must also be non-{@code null}. This method is designed for conveniently
+	 * performing {@code null}-checks for varargs or array parameters in methods and
+	 * constructors, as demonstrated below:
+	 * <pre>
+	 * public Foo(Bar... bars) {
+	 *     this.bars = ObjectUtil.requireNonNullArray(bars);
+	 * }
+	 * </pre>
+	 *
+	 * @param objects the array of objects to check for {@code null}
+	 * @return {@code objects} if not {@code null} and none its elements are {@code null}
+	 * @throws NullPointerException if any of the objects is {@code null} or the array
+	 *                              itself is {@code null}
+	 */
+	public static <T> T[] requireNonNullArray(T[] objects) {
+		requireNonNull(objects);
+		for (T o : objects) {
 			if (o == null) {
 				throw new NullPointerException();
 			}
 		}
+		return objects;
 	}
 	
 }

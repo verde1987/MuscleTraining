@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import at.aspg.muscletraining.util.ObjectUtil;
 import at.aspg.muscletraining.util.StringUtil;
 
 public class GroupedPlan extends AbstractPlan {
@@ -15,6 +16,7 @@ public class GroupedPlan extends AbstractPlan {
 	}
 	
 	public void addPlans(Plan... plans) {
+		ObjectUtil.requireNonNullArray(plans);
 		Collections.addAll(this.plans, plans);
 	}
 	

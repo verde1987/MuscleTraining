@@ -18,8 +18,8 @@ public class TestExercise extends AbstractUnitTest {
 		WeightRepsExercise exercise = new WeightRepsExercise();
 		exercise.setName("TestName");
 		exercise.setDescription("TestDescription");
-		exercise.setPrimaryMuscleRegions(Arrays.<IMuscleRegion>asList(MuscleRegion.SHOULDERS));
-		exercise.setSecondaryMuscleRegions(MuscleRegion.SHOULDERS.getSpecials());
+		exercise.addPrimaryMuscleRegions(MuscleRegion.SHOULDERS);
+		exercise.addSecondaryMuscleRegions(MuscleRegion.SHOULDERS.getSpecials().toArray(new IMuscleRegion[0]));
 		exercise.setWeight(50);
 		exercise.setBreakTime(20);
 		exercise.setReps(10);

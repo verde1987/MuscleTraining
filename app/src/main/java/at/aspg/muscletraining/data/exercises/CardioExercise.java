@@ -1,5 +1,8 @@
 package at.aspg.muscletraining.data.exercises;
 
+import java.util.List;
+
+import at.aspg.muscletraining.data.IMuscleRegion;
 import at.aspg.muscletraining.util.NumberUtil;
 
 public class CardioExercise extends Exercise implements Duration {
@@ -13,6 +16,11 @@ public class CardioExercise extends Exercise implements Duration {
 	protected CardioExercise(CardioExercise toCopy) {
 		super(toCopy);
 		duration = toCopy.duration;
+	}
+	
+	public CardioExercise(String name, String description, List<IMuscleRegion> primaryMuscleRegions, List<IMuscleRegion> secondaryMuscleRegions, int duration) {
+		super(name, description, primaryMuscleRegions, secondaryMuscleRegions);
+		this.duration = NumberUtil.checkRangeLowerBound(duration, 0);
 	}
 	
 	@Override

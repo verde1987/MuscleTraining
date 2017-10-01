@@ -1,5 +1,8 @@
 package at.aspg.muscletraining.data.exercises;
 
+import java.util.List;
+
+import at.aspg.muscletraining.data.IMuscleRegion;
 import at.aspg.muscletraining.util.NumberUtil;
 
 public abstract class SetsExercise extends Exercise {
@@ -16,6 +19,12 @@ public abstract class SetsExercise extends Exercise {
 		super(toCopy);
 		sets = toCopy.sets;
 		breakTime = toCopy.breakTime;
+	}
+	
+	public SetsExercise(String name, String description, List<IMuscleRegion> primaryMuscleRegions, List<IMuscleRegion> secondaryMuscleRegions, int sets, int breakTime) {
+		super(name, description, primaryMuscleRegions, secondaryMuscleRegions);
+		this.sets = NumberUtil.checkRangeLowerBound(sets, 0);
+		this.breakTime = NumberUtil.checkRangeLowerBound(breakTime, 0);
 	}
 	
 	public int getSets() {

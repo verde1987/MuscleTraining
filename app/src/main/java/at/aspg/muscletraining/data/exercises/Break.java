@@ -19,6 +19,10 @@ public class Break implements DisplayableItem {
 		duration = toCopy.duration;
 	}
 	
+	public Break(int duration) {
+		this.duration = NumberUtil.checkRangeLowerBound(duration, 0);
+	}
+	
 	public int getDuration() {
 		return duration;
 	}

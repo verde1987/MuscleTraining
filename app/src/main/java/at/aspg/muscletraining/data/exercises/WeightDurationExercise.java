@@ -1,5 +1,8 @@
 package at.aspg.muscletraining.data.exercises;
 
+import java.util.List;
+
+import at.aspg.muscletraining.data.IMuscleRegion;
 import at.aspg.muscletraining.util.NumberUtil;
 
 public class WeightDurationExercise extends DurationExercise implements Weight {
@@ -13,6 +16,11 @@ public class WeightDurationExercise extends DurationExercise implements Weight {
 	protected WeightDurationExercise(WeightDurationExercise toCopy) {
 		super(toCopy);
 		weight = toCopy.weight;
+	}
+	
+	public WeightDurationExercise(String name, String description, List<IMuscleRegion> primaryMuscleRegions, List<IMuscleRegion> secondaryMuscleRegions, int sets, int breakTime, int duration, double weight) {
+		super(name, description, primaryMuscleRegions, secondaryMuscleRegions, sets, breakTime, duration);
+		this.weight = NumberUtil.checkRangeLowerBound(weight, 0);
 	}
 	
 	@Override

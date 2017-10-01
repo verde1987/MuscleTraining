@@ -44,6 +44,13 @@ public abstract class Exercise implements DisplayableItem {
 		secondaryMuscleRegions = new ArrayList<>(toCopy.secondaryMuscleRegions);
 	}
 	
+	public Exercise(String name, String description, List<IMuscleRegion> primaryMuscleRegions, List<IMuscleRegion> secondaryMuscleRegions) {
+		this.name = ObjectUtil.requireNonNull(name);
+		this.description = ObjectUtil.requireNonNull(description);
+		this.primaryMuscleRegions = ObjectUtil.requireNonNullCollection(primaryMuscleRegions);
+		this.secondaryMuscleRegions = ObjectUtil.requireNonNullCollection(secondaryMuscleRegions);
+	}
+	
 	@Override
 	public String getName() {
 		return name;

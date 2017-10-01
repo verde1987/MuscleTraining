@@ -57,6 +57,7 @@ public class ObjectUtil {
 	 * </pre>
 	 *
 	 * @param objects the array of objects to check for {@code null}
+	 * @param <T>     the array-type
 	 * @return {@code objects} if not {@code null} and none its elements are {@code null}
 	 * @throws NullPointerException if any of the objects is {@code null} or the array
 	 *                              itself is {@code null}

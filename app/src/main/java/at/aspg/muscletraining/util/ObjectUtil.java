@@ -1,5 +1,7 @@
 package at.aspg.muscletraining.util;
 
+import java.util.Collection;
+
 public class ObjectUtil {
 	
 	// copied from java.util.Objects due to API restrictions
@@ -69,6 +71,29 @@ public class ObjectUtil {
 				throw new NullPointerException();
 			}
 		}
+		return objects;
+	}
+	
+	/**
+	 * Checks that the objects in the specified collection are not {@code null}. The
+	 * collection itself must also be non-{@code null}. This method is designed for
+	 * conveniently performing {@code null}-checks for collection-based parameters in
+	 * methods and constructors, as demonstrated below:
+	 * <pre>{@code
+	 * public Foo(List<Bar> bars) {
+	 *     this.bars = ObjectUtil.requireNonNullCollection(bars);
+	 * }
+	 * }</pre>
+	 *
+	 * @param objects the collection of objects to check for {@code null}
+	 * @param <C>     the type of the collection
+	 * @return {@code objects} if not {@code null} and none its elements are {@code null}
+	 * @throws NullPointerException if any of the objects is {@code null} or the
+	 *                              collection itself is {@code null}
+	 */
+	public static <C extends Collection<?>> C requireNonNullCollection(C objects) {
+		requireNonNull(objects);
+		requireNonNullArray(objects.toArray());
 		return objects;
 	}
 	

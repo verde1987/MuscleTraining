@@ -4,6 +4,9 @@
     <string name="default_exercise">Default Exercise</string>
     <string name="default_plan">Default Plan</string>
 
+    <!-- strings for user interface elements (buttons, labels, etc.) -->
+    <string name="button_exercises">Exercises</string>
+
     <!-- strings for predefined exercises -->
     <string name="exercise_barbell_curls">Barbell Curls</string>
     <string name="exercise_dumbbell_curls">Dumbbell Curls</string>
@@ -120,5 +123,11 @@
     <string name="exercise_description_calf_raise">Calf Raise</string>
     <string name="exercise_description_running">Running</string>
     <string name="exercise_description_ergometer">Ergometer</string>
+
+    <!-- strings for activity titles -->
+    <string name="title_activity_exercises">ExercisesActivity</string>
+
+    <!-- other strings -->
+    <string name="default_image_description">Image</string>
 
 </resources>

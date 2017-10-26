@@ -104,11 +104,19 @@ public class IOUtil {
 	 * @param object the object to serialize
 	 * @param file   the destination file to which the object is serialized
 	 * @throws IOException if the file cannot be created
+	 * @throws IllegalArgumentException if the name of the file is empty
 	 */
 	public static void serialize(Object object, File file) throws IOException {
 		ObjectUtil.requireNonNull(object, file);
+		if (file.getName().isEmpty()) {
+			throw new IllegalArgumentException("name of file is empty");
+		}
+		File parentFile = file.getParentFile();
 		PrintWriter writer = null;
 		try {
+			if (parentFile != null) {
+				parentFile.mkdirs();
+			}
 			writer = new PrintWriter(file);
 			getXStream().toXML(object, writer);
 		} finally {

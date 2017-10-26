@@ -174,7 +174,7 @@ public class IOUtil {
 	 */
 	public static File getWritableInternalFile(String filename) {
 		ObjectUtil.requireNonNull(filename);
-		File internalRootDir = AndroidUtil.getContext().getExternalFilesDir(null);
+		File internalRootDir = AndroidUtil.getContext().getFilesDir();
 		return new File(internalRootDir, filename);
 	}
 	

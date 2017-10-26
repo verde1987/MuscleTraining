@@ -106,6 +106,7 @@ public class IOUtil {
 	 * @throws IOException if the file cannot be created
 	 */
 	public static void serialize(Object object, File file) throws IOException {
+		ObjectUtil.requireNonNull(object, file);
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(file);
@@ -135,6 +136,7 @@ public class IOUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(File file) throws FileNotFoundException {
+		ObjectUtil.requireNonNull(file);
 		if (!file.exists() || file.isDirectory()) {
 			throw new FileNotFoundException();
 		}
